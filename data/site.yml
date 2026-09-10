@@ -1,0 +1,47 @@
+# Site-wide settings: page title, SEO meta tags, social share card, nav labels.
+# Accessed in templates as data.site.<key>
+
+# Shown in the browser tab and as the <title> tag.
+title: "Gifta Santosa — Fullstack Developer"
+
+# <meta name="description">. Search engines show this under your title.
+# Aim for 150–160 characters.
+description: >-
+  Gifta Santosa is a fullstack developer building production web applications
+  with Ruby on Rails, Java, and Python. Portfolio, projects, and CV.
+
+# The canonical public URL of the deployed site, with no trailing slash.
+# Used for og:url and the canonical link tag.
+# CHANGE THIS to your real URL once deployed, e.g.
+#   https://giftasantosa.github.io/portfolio
+url: "https://giftasantosa.github.io/portfolio"
+
+# Open Graph settings — control how the site looks when shared on
+# LinkedIn, Slack, X, WhatsApp, etc.
+open_graph:
+  # Falls back to the title/description above if left blank.
+  title: "Gifta Santosa — Fullstack Developer"
+  description: >-
+    Fullstack developer working across Ruby on Rails, Java, and Python.
+    See selected projects and get in touch.
+  # Path to the share image, relative to source/. Ideal size is 1200x630px.
+  image: "images/og-image.png"
+  # "website" for a portfolio; "article" for a blog post.
+  type: "website"
+
+# Navigation links. `id` must match the id="" of the matching <section>
+# in the page, or the active-link highlighting will not work.
+nav:
+  - id: "hero"
+    label: "Home"
+  - id: "about"
+    label: "About"
+  - id: "projects"
+    label: "Projects"
+  - id: "skills"
+    label: "Skills"
+  - id: "contact"
+    label: "Contact"
+
+# Text in the footer. The year is filled in automatically.
+footer_note: "Built with Middleman and Bootstrap. Hosted on GitHub Pages."

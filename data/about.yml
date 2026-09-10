@@ -1,0 +1,57 @@
+# Personal details shown in the hero and about sections.
+# Accessed in templates as data.about.<key>
+
+# Your full name — rendered as the main <h1> of the page.
+name: "Gifta Santosa"
+
+# Your role or job title, shown directly under your name.
+role: "Fullstack Developer"
+
+# One-sentence hook in the hero. Keep it short; it is set in large type.
+tagline: >-
+  ex recruiter who is currently a fullstack software developer in Tokyo!
+
+# Where you are based. Displayed as a small label in the hero.
+location: "Tokyo, Japan"
+
+# Set to false to hide the green "available for work" badge in the hero.
+available_for_work: true
+
+# Text of the availability badge (only shown when available_for_work is true).
+availability_label: "Available for new projects"
+
+# The About section body. Each list item becomes its own paragraph.
+bio:
+  - >-
+    I'm a fullstack developer with a bias toward the parts of a system that are
+    hard to change later: data models, background jobs, and the boundaries
+    between services. Most of my production work has been in Ruby on Rails,
+    with Java and Python for services where the workload calls for them.
+  - >-
+    I care about code that the next person can read. That usually means a
+    thorough test suite, migrations that are safe to run against live data, and
+    a README that lets a new teammate get running in one command.
+  - >-
+    Outside of client work I maintain a handful of small open-source tools and
+    write about the less glamorous side of shipping — deploys, observability,
+    and everything that happens after the feature is merged.
+
+# Short factual rows shown beside the bio. Add or remove freely.
+facts:
+  - label: "Experience"
+    value: "5+ years building production web apps"
+  - label: "Focus"
+    value: "Backend architecture, APIs, and data modelling"
+  - label: "Currently"
+    value: "Working with Rails 7 and PostgreSQL on AWS"
+
+# The technologies called out as pills in the About section.
+highlights:
+  - "Ruby on Rails"
+  - "Java"
+  - "Python"
+  - "JavaScript"
+  - "PostgreSQL"
+  - "MySQL"
+  - "Heroku"
+  - "AWS"

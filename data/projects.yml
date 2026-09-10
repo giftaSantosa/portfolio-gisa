@@ -1,0 +1,102 @@
+# Portfolio projects. Each "- title:" block below is one project card.
+# Accessed in templates as data.projects (a list you can loop over).
+#
+# FIELD REFERENCE
+# ---------------
+# title       (required) Project name, shown as the card heading.
+# description (required) 2–3 sentences. What it does and what is interesting
+#                        about how it was built.
+# tags        (required) List of technologies. Rendered as small tag pills.
+# featured    (required) true or false. Featured projects are sorted to the
+#                        front of the grid and get an accent border plus a
+#                        "Featured" badge. Aim for 1–2 featured projects.
+# repo        (required) URL of the public source code. Opens in a new tab.
+# demo        (optional) URL of a live deployment. The "Live demo" button is
+#                        hidden entirely when this is blank or removed.
+# image       (optional) Path to a screenshot, relative to source/, e.g.
+#                        "images/projects/ledgerly.png". Left empty below —
+#                        an empty value renders a blank placeholder block, so
+#                        the cards keep their shape until you have real
+#                        screenshots. To add one: drop the file into
+#                        source/images/projects/ and put its path here.
+# image_alt   (optional) Describes the screenshot for screen readers and for
+#                        when the image fails to load. Fill this in whenever
+#                        you set `image`.
+# year        (optional) Shown as a small label on the card.
+
+- title: "Ledgerly"
+  description: >-
+    A double-entry bookkeeping API for small businesses, built so that every
+    balance is derived from immutable journal entries rather than a mutable
+    running total. Handles multi-currency accounts with daily rate snapshots,
+    and reconciles against bank statement imports. Backed by a PostgreSQL
+    schema with database-level constraints that make an unbalanced entry
+    impossible to persist.
+  tags:
+    - "Ruby on Rails"
+    - "PostgreSQL"
+    - "Sidekiq"
+    - "Heroku"
+  featured: true
+  repo: "https://github.com/giftaSantosa/ledgerly"
+  demo: "https://ledgerly-demo.herokuapp.com"
+  image: ""
+  image_alt: ""
+  year: "2025"
+
+- title: "Transit Pulse"
+  description: >-
+    A real-time transit arrival tracker that ingests GTFS-Realtime feeds from
+    several city operators and normalises them into a single stream. Kafka
+    absorbs the burst traffic at peak hours, while a Spring Boot service fans
+    updates out over WebSockets to roughly 400 concurrent riders. Predictions
+    stay accurate to within about 90 seconds on the routes it covers.
+  tags:
+    - "Java"
+    - "Spring Boot"
+    - "Kafka"
+    - "AWS"
+  featured: true
+  repo: "https://github.com/giftaSantosa/transit-pulse"
+  demo: "https://transit-pulse.example.com"
+  image: ""
+  image_alt: ""
+  year: "2024"
+
+- title: "Recipe Radar"
+  description: >-
+    A recipe recommender that suggests meals from whatever is already in your
+    kitchen, ranking results by how few extra ingredients you would need to
+    buy. A FastAPI service serves the model behind a small React front end,
+    with results cached in Redis so repeat searches return instantly.
+  tags:
+    - "Python"
+    - "FastAPI"
+    - "Redis"
+    - "React"
+  featured: false
+  repo: "https://github.com/giftaSantosa/recipe-radar"
+  # No live demo for this one — the button is hidden automatically.
+  demo: ""
+  image: ""
+  image_alt: ""
+  year: "2024"
+
+- title: "Deploy Dash"
+  description: >-
+    A single-screen deployment dashboard that pulls release history from
+    Heroku and GitHub Actions into one timeline, so you can see what shipped,
+    when, and who approved it. Flags any release that went out without a green
+    CI run. Runs as a static front end against a thin Node proxy that keeps
+    API tokens off the client.
+  tags:
+    - "JavaScript"
+    - "Node.js"
+    - "MySQL"
+    - "GitHub Actions"
+  featured: false
+  repo: "https://github.com/giftaSantosa/deploy-dash"
+  demo: "https://deploy-dash.example.com"
+  image: ""
+  image_alt: ""
+  year: "2023"

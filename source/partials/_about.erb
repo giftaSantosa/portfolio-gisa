@@ -1,0 +1,38 @@
+<%#
+  About section: bio paragraphs, quick facts table, and the tech stack pills.
+  Content comes from data/about.yml (bio, facts, highlights).
+-%>
+<section id="about" class="section">
+  <div class="container">
+    <p class="section-eyebrow reveal" data-reveal>01 — About</p>
+    <h2 class="section-title reveal" data-reveal>A little background</h2>
+
+    <div class="row g-5">
+      <div class="col-lg-7">
+        <% data.about.bio.each do |paragraph| %>
+          <p class="lede reveal" data-reveal><%= paragraph.strip %></p>
+        <% end %>
+      </div>
+
+      <div class="col-lg-5">
+        <%# Quick facts. A definition list is the correct semantic element for
+            label/value pairs like these. %>
+        <dl class="fact-list reveal" data-reveal>
+          <% data.about.facts.each do |fact| %>
+            <dt><%= fact.label %></dt>
+            <dd><%= fact.value %></dd>
+          <% end %>
+        </dl>
+
+        <div class="reveal" data-reveal>
+          <h3 class="subhead">Working with</h3>
+          <ul class="tag-list" role="list">
+            <% data.about.highlights.each do |tech| %>
+              <li class="tag"><%= tech %></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

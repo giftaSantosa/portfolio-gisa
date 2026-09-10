@@ -1,0 +1,42 @@
+# Social links and CV download. Accessed in templates as data.social.<key>
+#
+# Every link here opens in a new tab with rel="noopener noreferrer" applied
+# automatically, and gets an aria-label so screen readers announce it properly.
+
+# The icon buttons in the Contact section.
+#
+# FIELD REFERENCE
+# ---------------
+# name  (required) Platform name. Used for the aria-label and tooltip.
+# url   (required) Full URL including https://
+# icon  (required) Which built-in SVG icon to draw. Supported values:
+#                    github, linkedin, email, x, mastodon, dev
+#                  These are defined in source/partials/_icon.erb — add a new
+#                  <when> branch there to support another platform.
+# handle (optional) Your username on that platform, shown in the link list.
+links:
+  - name: "GitHub"
+    url: "https://github.com/giftaSantosa"
+    icon: "github"
+    handle: "@giftaSantosa"
+
+  - name: "LinkedIn"
+    url: "https://linkedin.com/in/gifta-santosa"
+    icon: "linkedin"
+    handle: "gifta-santosa"
+
+  - name: "Email"
+    url: "mailto:giftaputri.santosa@gmail.com"
+    icon: "email"
+    handle: "giftaputri.santosa@gmail.com"
+
+# The "Download CV" button.
+cv:
+  # Set to false to hide the CV button everywhere.
+  enabled: true
+  # Button text.
+  label: "Download CV"
+  # Path to the PDF, relative to source/. Replace the placeholder file at
+  # source/cv/gifta-santosa-cv.pdf with your real CV, keeping the same name —
+  # then nothing here needs to change.
+  path: "cv/gifta-santosa-cv.pdf"

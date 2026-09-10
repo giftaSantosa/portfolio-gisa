@@ -1,0 +1,20 @@
+<%#
+  Page footer: copyright line and a back-to-top link.
+  The year updates itself at build time — no yearly edit needed.
+-%>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-inner">
+      <p class="footer-text">
+        &copy; <%= Time.now.year %> <%= data.about.name %>.
+        <span class="footer-note"><%= data.site.footer_note %></span>
+      </p>
+      <a class="footer-top" href="#hero">
+        Back to top
+        <svg class="icon" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" focusable="false">
+          <path d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5Z"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</footer>

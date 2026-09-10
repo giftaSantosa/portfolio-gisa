@@ -1,0 +1,31 @@
+<%#
+  Skills grid, grouped by category. Reads data/skills.yml.
+  Skills marked `level: core` are emphasised with the accent colour.
+-%>
+<section id="skills" class="section">
+  <div class="container">
+    <p class="section-eyebrow reveal" data-reveal>03 — Skills</p>
+    <h2 class="section-title reveal" data-reveal>Tools I reach for</h2>
+    <p class="section-intro reveal" data-reveal>
+      Highlighted items are the ones I use most days; the rest I'm comfortable
+      picking up when a project calls for them.
+    </p>
+
+    <div class="row g-4">
+      <% data.skills.each do |group| %>
+        <div class="col-md-6 col-lg-3">
+          <div class="skill-group reveal" data-reveal>
+            <h3 class="skill-category"><%= group.category %></h3>
+            <ul class="tag-list" role="list">
+              <% group.items.each do |skill| %>
+                <li class="tag <%= "tag-core" if skill.level == "core" %>">
+                  <%= skill.name %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>

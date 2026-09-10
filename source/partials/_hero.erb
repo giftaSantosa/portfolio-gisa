@@ -1,0 +1,43 @@
+<%#
+  Hero section: name, role, tagline, and the primary calls to action.
+  Content comes from data/about.yml and data/social.yml.
+-%>
+<section id="hero" class="section section-hero">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-9">
+
+
+        <%# The single <h1> of the page — everything else steps down from here. %>
+        <h1 class="hero-name reveal" data-reveal><%= data.about.name %></h1>
+
+        <p class="hero-role reveal" data-reveal><%= data.about.role %></p>
+
+        <p class="hero-tagline reveal" data-reveal><%= data.about.tagline.strip %></p>
+
+        <p class="hero-location reveal" data-reveal>
+          <svg class="icon" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" focusable="false">
+            <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10Zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z"/>
+          </svg>
+          <%= data.about.location %>
+        </p>
+
+        <div class="hero-actions reveal" data-reveal>
+          <a class="btn btn-primary-solid" href="#projects">View projects</a>
+          <a class="btn btn-outline-subtle" href="#contact">Get in touch</a>
+          <% if data.social.cv.enabled %>
+            <%# download attr asks the browser to save rather than open the PDF. %>
+            <a class="btn btn-ghost" href="<%= url_for("/#{data.social.cv.path}") %>" download>
+              <svg class="icon" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" focusable="false">
+                <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5Z"/>
+                <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3Z"/>
+              </svg>
+              <%= data.social.cv.label %>
+            </a>
+          <% end %>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>

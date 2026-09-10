@@ -1,0 +1,19 @@
+# Files that should never be committed to git.
+
+# Generated output of `middleman build` — rebuilt on every deploy.
+/build/
+
+# Local bundler config and vendored gems.
+/.bundle/
+/vendor/bundle/
+
+# Middleman caches.
+/.sass-cache/
+/.cache/
+/tmp/
+
+# macOS / editor noise.
+.DS_Store
+*.swp
+.idea/
+.vscode/

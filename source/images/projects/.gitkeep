@@ -1,0 +1,3 @@
+Drop project screenshots in this folder, then point a project's `image:` field
+in data/projects.yml at it, e.g. image: "images/projects/ledgerly.png".
+Recommended size: 800x450 (16:9). Until then, cards show a blank placeholder.

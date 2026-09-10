@@ -1,0 +1,104 @@
+<%#
+  Projects grid. Reads data/projects.yml.
+
+  Featured projects are sorted to the front and given an accent border plus a
+  badge. `sort_by` with false==0 / true==1 puts featured first; the index keeps
+  the sort stable so projects otherwise stay in the order written in the YAML.
+-%>
+<%
+  projects = data.projects.each_with_index.sort_by { |project, i| [project.featured ? 0 : 1, i] }
+                                          .map(&:first)
+-%>
+<section id="projects" class="section section-alt">
+  <div class="container">
+    <p class="section-eyebrow reveal" data-reveal>02 — Projects</p>
+    <h2 class="section-title reveal" data-reveal>Selected work</h2>
+    <p class="section-intro reveal" data-reveal>
+      A few things I've built recently. Every one of them has its source
+      available — take a look at how they're put together.
+    </p>
+
+    <div class="row g-4">
+      <% projects.each do |project| %>
+        <div class="col-md-6">
+          <article class="project-card reveal <%= "is-featured" if project.featured %>" data-reveal>
+
+            <% if project.featured %>
+              <p class="featured-badge">
+                <svg class="icon" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" focusable="false">
+                  <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256Z"/>
+                </svg>
+                Featured
+              </p>
+            <% end %>
+
+            <%#
+              Screenshot area. While `image` is empty in projects.yml this
+              renders as an empty tinted block that just holds the card's
+              shape — no <img>, no broken-image icon, and nothing announced to
+              screen readers. Set `image` on a project and it becomes a real
+              picture with its alt text.
+            -%>
+            <% if project.image.to_s.empty? %>
+              <div class="project-thumb project-thumb-empty" aria-hidden="true"></div>
+            <% else %>
+              <div class="project-thumb">
+                <img
+                  src="<%= image_path(project.image.sub(%r{\Aimages/}, "")) %>"
+                  alt="<%= project.image_alt.to_s.empty? ? "Screenshot of #{project.title}" : project.image_alt %>"
+                  loading="lazy"
+                  width="800"
+                  height="450">
+              </div>
+            <% end %>
+
+            <div class="project-body">
+              <div class="project-head">
+                <h3 class="project-title"><%= project.title %></h3>
+                <% unless project.year.to_s.empty? %>
+                  <span class="project-year"><%= project.year %></span>
+                <% end %>
+              </div>
+
+              <p class="project-description"><%= project.description.strip %></p>
+
+              <ul class="tag-list tag-list-sm" role="list">
+                <% project.tags.each do |tag| %>
+                  <li class="tag"><%= tag %></li>
+                <% end %>
+              </ul>
+
+              <div class="project-links">
+                <%# All external links get target=_blank + rel=noopener noreferrer. %>
+                <a class="project-link"
+                   href="<%= project.repo %>"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   aria-label="<%= project.title %> source code on GitHub (opens in a new tab)">
+                  <%= partial "partials/icon", locals: { name: "github" } %>
+                  Source
+                </a>
+
+                <%# The demo button only renders when a demo URL is present. %>
+                <% unless project.demo.to_s.empty? %>
+                  <a class="project-link"
+                     href="<%= project.demo %>"
+                     target="_blank"
+                     rel="noopener noreferrer"
+                     aria-label="<%= project.title %> live demo (opens in a new tab)">
+                    <svg class="icon" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" focusable="false">
+                      <path d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5Z"/>
+                      <path d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5Z"/>
+                    </svg>
+                    Live demo
+                  </a>
+                <% end %>
+              </div>
+            </div>
+
+          </article>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>

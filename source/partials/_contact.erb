@@ -1,0 +1,53 @@
+<%#
+  Contact section: social icon buttons and the CV download.
+  All URLs come from data/social.yml — no contact form, nothing to host.
+-%>
+<section id="contact" class="section section-alt">
+  <div class="container">
+    <p class="section-eyebrow reveal" data-reveal>04 — Contact</p>
+    <h2 class="section-title reveal" data-reveal>Let's talk</h2>
+    <p class="section-intro reveal" data-reveal>
+      I'm open to freelance work, contract roles, and interesting problems in
+      general. The fastest way to reach me is email — I reply within a day or two.
+    </p>
+
+    <%# Icon buttons. Each carries an aria-label because the icon alone gives a
+        screen reader nothing to announce. %>
+    <ul class="social-list reveal" data-reveal role="list">
+      <% data.social.links.each do |link| %>
+        <%
+          # mailto: links should not open a new tab — it leaves a blank window
+          # behind after the mail client takes over.
+          external = !link.url.start_with?("mailto:")
+        -%>
+        <li>
+          <a class="social-btn"
+             href="<%= link.url %>"
+             <%= 'target="_blank" rel="noopener noreferrer"' if external %>
+             aria-label="<%= link.name %><%= " (opens in a new tab)" if external %>"
+             title="<%= link.name %>">
+            <%= partial "partials/icon", locals: { name: link.icon } %>
+            <span class="social-label">
+              <span class="social-name"><%= link.name %></span>
+              <% unless link.handle.to_s.empty? %>
+                <span class="social-handle"><%= link.handle %></span>
+              <% end %>
+            </span>
+          </a>
+        </li>
+      <% end %>
+    </ul>
+
+    <% if data.social.cv.enabled %>
+      <div class="reveal" data-reveal>
+        <a class="btn btn-primary-solid" href="<%= url_for("/#{data.social.cv.path}") %>" download>
+          <svg class="icon" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" focusable="false">
+            <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5Z"/>
+            <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3Z"/>
+          </svg>
+          <%= data.social.cv.label %>
+        </a>
+      </div>
+    <% end %>
+  </div>
+</section>
