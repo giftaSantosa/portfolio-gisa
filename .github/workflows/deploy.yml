@@ -1,4 +1,4 @@
-# Builds the site and publishes it to GitHub Pages on every push to main.
+# Builds the site and publishes it to GitHub Pages on every push to master.
 #
 # One-time setup in your repo: Settings → Pages → Build and deployment →
 # Source → "GitHub Actions". You do NOT need a gh-pages branch when using
@@ -8,7 +8,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [main]
+    branches: [master]
   # Lets you re-run a deploy by hand from the Actions tab.
   workflow_dispatch:
 
