@@ -1,53 +1,76 @@
 <%#
-  Contact section: social icon buttons and the CV download.
-  All URLs come from data/social.yml — no contact form, nothing to host.
+  Contact section: social icon buttons, the CV download, and a paper-plane
+  illustration. All URLs come from data/social.yml — no contact form, nothing
+  to host.
 -%>
 <section id="contact" class="section section-alt">
   <div class="container">
-    <p class="section-eyebrow reveal" data-reveal>04 — Contact</p>
-    <h2 class="section-title reveal" data-reveal>Let's talk</h2>
-    <p class="section-intro reveal" data-reveal>
-      I'm open to freelance work, contract roles, and interesting problems in
-      general. The fastest way to reach me is email — I reply within a day or two.
-    </p>
+    <div class="row align-items-center g-5">
+      <div class="col-lg-7">
+        <p class="section-eyebrow reveal" data-reveal>04 — Contact</p>
+        <h2 class="section-title reveal" data-reveal>Let's talk</h2>
+        <p class="section-intro reveal" data-reveal>
+          I'm here to learn and build more projects! If you have any volunteering,
+          freelance, fulltime, or even just want to chat, contact me on my socials here.
+        </p>
 
-    <%# Icon buttons. Each carries an aria-label because the icon alone gives a
-        screen reader nothing to announce. %>
-    <ul class="social-list reveal" data-reveal role="list">
-      <% data.social.links.each do |link| %>
-        <%
-          # mailto: links should not open a new tab — it leaves a blank window
-          # behind after the mail client takes over.
-          external = !link.url.start_with?("mailto:")
-        -%>
-        <li>
-          <a class="social-btn"
-             href="<%= link.url %>"
-             <%= 'target="_blank" rel="noopener noreferrer"' if external %>
-             aria-label="<%= link.name %><%= " (opens in a new tab)" if external %>"
-             title="<%= link.name %>">
-            <%= partial "partials/icon", locals: { name: link.icon } %>
-            <span class="social-label">
-              <span class="social-name"><%= link.name %></span>
-              <% unless link.handle.to_s.empty? %>
-                <span class="social-handle"><%= link.handle %></span>
-              <% end %>
-            </span>
-          </a>
-        </li>
-      <% end %>
-    </ul>
+        <%# Icon buttons. Each carries an aria-label because the icon alone gives a
+            screen reader nothing to announce. %>
+        <ul class="social-list reveal" data-reveal role="list">
+          <% data.social.links.each do |link| %>
+            <%
+              # mailto: links should not open a new tab — it leaves a blank window
+              # behind after the mail client takes over.
+              external = !link.url.start_with?("mailto:")
+            -%>
+            <li>
+              <a class="social-btn"
+                 href="<%= link.url %>"
+                 <%= 'target="_blank" rel="noopener noreferrer"' if external %>
+                 aria-label="<%= link.name %><%= " (opens in a new tab)" if external %>"
+                 title="<%= link.name %>">
+                <%= partial "partials/icon", locals: { name: link.icon } %>
+                <span class="social-label">
+                  <span class="social-name"><%= link.name %></span>
+                  <% unless link.handle.to_s.empty? %>
+                    <span class="social-handle"><%= link.handle %></span>
+                  <% end %>
+                </span>
+              </a>
+            </li>
+          <% end %>
+        </ul>
 
-    <% if data.social.cv.enabled %>
-      <div class="reveal" data-reveal>
-        <a class="btn btn-primary-solid" href="<%= url_for("/#{data.social.cv.path}") %>" download>
-          <svg class="icon" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" focusable="false">
-            <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5Z"/>
-            <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3Z"/>
-          </svg>
-          <%= data.social.cv.label %>
-        </a>
+        <% if data.social.cv.enabled %>
+          <div class="reveal" data-reveal>
+            <a class="btn btn-primary-solid" href="<%= url_for("/#{data.social.cv.path}") %>" download>
+              <svg class="icon" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" focusable="false">
+                <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5Z"/>
+                <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3Z"/>
+              </svg>
+              <%= data.social.cv.label %>
+            </a>
+          </div>
+        <% end %>
       </div>
-    <% end %>
+
+      <%# Decorative paper plane with a dotted flight trail. Colours come from
+          CSS (see .contact-visual) so it follows the dark-mode toggle. Below
+          lg it stacks under the links at a smaller size. %>
+      <div class="col-lg-4 offset-lg-1">
+        <div class="contact-visual reveal" data-reveal aria-hidden="true">
+          <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" focusable="false">
+            <path class="contact-visual-trail"
+                  d="M 70 330 C 40 250, 120 220, 160 250 C 210 288, 130 330, 120 260 C 112 205, 200 170, 250 150"
+                  fill="none" stroke-width="6" stroke-linecap="round" stroke-dasharray="2 18"/>
+            <g class="contact-visual-plane" transform="translate(248 108) rotate(28)"
+               fill="none" stroke-width="9" stroke-linejoin="round" stroke-linecap="round">
+              <path d="M 0 60 L 130 5 L 70 135 L 52 82 Z"/>
+              <path d="M 130 5 L 52 82"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
   </div>
 </section>

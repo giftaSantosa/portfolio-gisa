@@ -441,10 +441,11 @@ a:hover { color: var(--color-accent); }
   padding: 0.25rem 0.7rem;
 }
 
+/* Soft grey frame behind screenshots that don't fill the 16:9 box. */
 .project-thumb {
   aspect-ratio: 16 / 9;
   overflow: hidden;
-  background-color: var(--color-accent-soft);
+  background-color: var(--color-border);
   border-bottom: 1px solid var(--color-border);
 }
 
@@ -452,6 +453,7 @@ a:hover { color: var(--color-accent); }
    faint diagonal texture, so it reads as "space reserved" rather than as a
    picture that failed to load. */
 .project-thumb-empty {
+  background-color: var(--color-accent-soft);
   background-image: repeating-linear-gradient(
     45deg,
     transparent,
@@ -461,14 +463,14 @@ a:hover { color: var(--color-accent); }
   );
   opacity: 0.55;
 }
+/* `contain` rather than `cover` so wide app screenshots show edge to edge
+   instead of being cropped; any leftover space shows the thumb's background. */
 .project-thumb img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   display: block;
-  transition: transform 400ms cubic-bezier(0.4, 0, 0.2, 1);
 }
-.project-card:hover .project-thumb img { transform: scale(1.03); }
 
 .project-body {
   display: flex;
@@ -597,6 +599,20 @@ a:hover { color: var(--color-accent); }
   font-size: 0.78rem;
   color: var(--color-text-subtle);
 }
+
+/* Paper-plane illustration beside the contact links. Strokes use theme tokens
+   so the drawing flips with dark mode. Smaller while it's stacked under the
+   links, full size once it has its own column at lg. */
+.contact-visual {
+  max-width: 240px;
+  margin-inline: auto;
+}
+@media (min-width: 992px) {
+  .contact-visual { max-width: 380px; }
+}
+.contact-visual svg { display: block; width: 100%; height: auto; }
+.contact-visual-trail { stroke: var(--color-border-strong); }
+.contact-visual-plane { stroke: var(--color-primary); }
 
 /* ==========================================================================
    Footer

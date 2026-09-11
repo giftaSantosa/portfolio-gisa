@@ -25,15 +25,16 @@ links:
     icon: "linkedin"
     handle: "gifta-santosa"
 
-  - name: "Email"
-    url: "mailto:giftaputri.santosa@gmail.com"
-    icon: "email"
-    handle: "giftaputri.santosa@gmail.com"
+  - name: "Instagram"
+    url: "https://www.instagram.com/gipetpet/"
+    icon: "instagram"
+    handle: "gipetpet"
+
 
 # The "Download CV" button.
 cv:
   # Set to false to hide the CV button everywhere.
-  enabled: true
+  enabled: false
   # Button text.
   label: "Download CV"
   # Path to the PDF, relative to source/. Replace the placeholder file at

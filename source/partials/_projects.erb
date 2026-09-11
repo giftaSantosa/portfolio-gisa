@@ -15,11 +15,11 @@
     <h2 class="section-title reveal" data-reveal>Selected work</h2>
     <p class="section-intro reveal" data-reveal>
       A few things I've built recently. Every one of them has its source
-      available — take a look at how they're put together.
+      available!
     </p>
 
     <div class="row g-4">
-      <% projects.each do |project| %>
+      <% projects.each_with_index do |project, index| %>
         <div class="col-md-6">
           <article class="project-card reveal <%= "is-featured" if project.featured %>" data-reveal>
 
@@ -33,22 +33,59 @@
             <% end %>
 
             <%#
-              Screenshot area. While `image` is empty in projects.yml this
+              Screenshot area. While `images` is empty in projects.yml this
               renders as an empty tinted block that just holds the card's
               shape — no <img>, no broken-image icon, and nothing announced to
-              screen readers. Set `image` on a project and it becomes a real
-              picture with its alt text.
+              screen readers. One image renders as a plain picture; two or
+              more become a Bootstrap carousel with arrows and indicators.
+              There is no data-bs-ride, so it never autoplays — it only moves
+              when the visitor clicks, swipes, or uses the arrow keys.
             -%>
-            <% if project.image.to_s.empty? %>
+            <%
+              slides = project.images.to_a.reject { |slide| slide.src.to_s.empty? }
+              carousel_id = "project-carousel-#{index}"
+            -%>
+            <% if slides.empty? %>
               <div class="project-thumb project-thumb-empty" aria-hidden="true"></div>
             <% else %>
               <div class="project-thumb">
-                <img
-                  src="<%= image_path(project.image.sub(%r{\Aimages/}, "")) %>"
-                  alt="<%= project.image_alt.to_s.empty? ? "Screenshot of #{project.title}" : project.image_alt %>"
-                  loading="lazy"
-                  width="800"
-                  height="450">
+                <div id="<%= carousel_id %>" class="carousel slide h-100">
+                  <% if slides.size > 1 %>
+                    <div class="carousel-indicators">
+                      <% slides.each_index do |i| %>
+                        <button type="button"
+                                data-bs-target="#<%= carousel_id %>"
+                                data-bs-slide-to="<%= i %>"
+                                <%= 'class="active" aria-current="true"' if i.zero? %>
+                                aria-label="<%= project.title %> screenshot <%= i + 1 %>"></button>
+                      <% end %>
+                    </div>
+                  <% end %>
+
+                  <div class="carousel-inner h-100">
+                    <% slides.each_with_index do |slide, i| %>
+                      <div class="carousel-item h-100 <%= "active" if i.zero? %>">
+                        <img
+                          src="<%= image_path(slide.src.sub(%r{\Aimages/}, "")) %>"
+                          alt="<%= slide.alt.to_s.empty? ? "Screenshot #{i + 1} of #{project.title}" : slide.alt %>"
+                          loading="lazy"
+                          width="800"
+                          height="450">
+                      </div>
+                    <% end %>
+                  </div>
+
+                  <% if slides.size > 1 %>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#<%= carousel_id %>" data-bs-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Previous <%= project.title %> screenshot</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#<%= carousel_id %>" data-bs-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Next <%= project.title %> screenshot</span>
+                    </button>
+                  <% end %>
+                </div>
               </div>
             <% end %>
 

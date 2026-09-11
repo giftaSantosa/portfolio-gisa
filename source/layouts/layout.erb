@@ -39,6 +39,15 @@
     <link rel="icon" href="<%= image_path("favicon.svg") %>" type="image/svg+xml">
     <link rel="apple-touch-icon" href="<%= image_path("favicon.svg") %>">
 
+    <%# --- Font Awesome 6 icons from CDN --- %>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css"
+      crossorigin="anonymous">
+
+    <%# --- Typed JS CDN --- %>
+    <script src="https://unpkg.com/typed.js@3.0.0/dist/typed.umd.js"></script>
+
     <%#
       Apply the saved theme BEFORE the browser paints. If this ran at the end
       of the body instead, a user who prefers dark mode would see a white
@@ -76,6 +85,7 @@
   </head>
 
   <body>
+
     <%# Lets keyboard users jump straight past the nav to the content. %>
     <a class="skip-link" href="#main">Skip to main content</a>
 
@@ -91,6 +101,6 @@
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"></script>
-    <%= javascript_include_tag "theme-toggle", "scroll" %>
+    <%= javascript_include_tag "theme-toggle", "scroll", "typed" %>
   </body>
 </html>

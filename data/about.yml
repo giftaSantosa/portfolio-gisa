@@ -23,27 +23,29 @@ availability_label: "Available for new projects"
 # The About section body. Each list item becomes its own paragraph.
 bio:
   - >-
-    I'm a fullstack developer with a bias toward the parts of a system that are
-    hard to change later: data models, background jobs, and the boundaries
-    between services. Most of my production work has been in Ruby on Rails,
-    with Java and Python for services where the workload calls for them.
+    Before web development, I spent ~2.5 years recruiting for over 60+
+    developers around the world! Coding actually started as a curiosity while
+    I was recruiting every day. I was curious if I can actually build the things
+    that I was sourcing for 😅
   - >-
-    I care about code that the next person can read. That usually means a
-    thorough test suite, migrations that are safe to run against live data, and
-    a README that lets a new teammate get running in one command.
+    This curiosity turns to programming after work every day for 2 years, quit my high-paying job to join IT Bootcamp, and now I'm ready to
+    build more production-level meaningful products!
   - >-
-    Outside of client work I maintain a handful of small open-source tools and
-    write about the less glamorous side of shipping — deploys, observability,
-    and everything that happens after the feature is merged.
+    With ~1.5 years of project & training experience, I specialize in backend development,
+    in particular Ruby on Rails, Java, and Python. For databases, I've used PostgreSQL and MySQL,
+    I've deployed on Heroku Cloud and on target to get AWS Cloud Practicioner Certification.
+  - >-
+    Outside of work, I love dancing, snowboarding, and extreme sports like canyoning or white water
+    rafting! I build content from time to time on Linkedin and Instagram so let's connect!
 
 # Short factual rows shown beside the bio. Add or remove freely.
 facts:
   - label: "Experience"
-    value: "5+ years building production web apps"
+    value: "1.5+ years of project & training to build web applications"
   - label: "Focus"
-    value: "Backend architecture, APIs, and data modelling"
+    value: "Backend architecture, APIs, and data scraping"
   - label: "Currently"
-    value: "Working with Rails 7 and PostgreSQL on AWS"
+    value: "Making UmbrellaBot to tell that connects with weather API!"
 
 # The technologies called out as pills in the About section.
 highlights:
