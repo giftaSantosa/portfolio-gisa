@@ -1,0 +1,85 @@
+<%#
+  Layout for project case studies (source/projects/*.html.md). Wraps the main
+  layout, so the nav, footer, theme toggle, and meta tags are shared.
+
+  Front matter a case study can set:
+    title        (required) Page heading and <title>.
+    description  (required) One-sentence summary, shown under the heading and
+                            used for the meta description / share card.
+    project      (required) Must match a `title:` in data/projects.yml. Tags,
+                            year, repo and demo links are read from there, so
+                            they are never written twice.
+    cover        (optional) Screenshot shown under the header, path relative
+                            to source/images/, e.g. "projects/jobeasy-main.png".
+    cover_alt    (optional) Alt text for the cover.
+-%>
+<%
+  page = current_page.data
+  project = data.projects.find { |p| p.title == page.project }
+  home = url_for("/index.html")
+-%>
+<% wrap_layout :layout do %>
+  <article class="case-study">
+    <header class="section case-study-header" data-nav-sentinel>
+      <div class="container case-study-container">
+        <a class="case-study-back" href="<%= home %>#projects">
+          <svg class="icon" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" focusable="false">
+            <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8Z"/>
+          </svg>
+          All projects
+        </a>
+
+        <p class="section-eyebrow">
+          Case study<% if project && !project.year.to_s.empty? %> · <%= project.year %><% end %>
+        </p>
+        <h1 class="case-study-title"><%= page.title %></h1>
+        <p class="case-study-lede"><%= page.description %></p>
+
+        <% if project %>
+          <ul class="tag-list tag-list-sm case-study-tags" role="list">
+            <% project.tags.each do |tag| %>
+              <li class="tag"><%= tag %></li>
+            <% end %>
+          </ul>
+
+          <div class="hero-actions">
+            <% unless project.demo.to_s.empty? %>
+              <a class="btn btn-primary-solid" href="<%= project.demo %>" target="_blank" rel="noopener noreferrer">
+                Live demo
+                <span class="visually-hidden">(opens in a new tab)</span>
+              </a>
+            <% end %>
+            <a class="btn btn-outline-subtle" href="<%= project.repo %>" target="_blank" rel="noopener noreferrer">
+              <%= partial "partials/icon", locals: { name: "github" } %>
+              Source code
+              <span class="visually-hidden">(opens in a new tab)</span>
+            </a>
+          </div>
+        <% end %>
+      </div>
+    </header>
+
+    <% unless page.cover.to_s.empty? %>
+      <div class="container case-study-container">
+        <figure class="case-study-cover">
+          <%= image_tag page.cover, alt: page.cover_alt.to_s, width: 1600, height: 900 %>
+        </figure>
+      </div>
+    <% end %>
+
+    <div class="container case-study-container">
+      <div class="prose">
+        <%= yield %>
+      </div>
+
+      <p class="case-study-footer-link">
+        <a class="btn btn-ghost" href="<%= home %>#projects">
+          <svg class="icon" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" focusable="false">
+            <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8Z"/>
+          </svg>
+          Back to all projects
+        </a>
+      </p>
+    </div>
+  </article>
+<% end %>

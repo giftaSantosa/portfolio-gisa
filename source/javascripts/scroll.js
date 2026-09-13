@@ -25,7 +25,11 @@
   var sections = [];
 
   navLinks.forEach(function (link) {
-    var id = link.getAttribute("href").replace("#", "");
+    // On a case-study page the links point back home (../../#about), so there
+    // is nothing on this page to highlight. Only same-page anchors count.
+    var href = link.getAttribute("href");
+    if (href.charAt(0) !== "#") return;
+    var id = href.slice(1);
     var section = document.getElementById(id);
     if (section) {
       linkFor[id] = link;
@@ -118,7 +122,9 @@
   // --- 3. Navbar border once scrolled -------------------------------------
 
   var nav = document.querySelector(".site-nav");
-  var sentinel = document.getElementById("hero");
+  // The first section on each page carries data-nav-sentinel: the hero on
+  // the home page, the case-study header on a project page.
+  var sentinel = document.querySelector("[data-nav-sentinel]");
 
   if (nav && sentinel && "IntersectionObserver" in window) {
     // Watch a sliver at the top of the page: once it scrolls out of view, the

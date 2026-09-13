@@ -8,25 +8,36 @@
   # URL — a relative path will not render a preview card.
   og = data.site.open_graph
   og_image_url = "#{data.site.url}/#{og.image}"
-  og_title = og.title.to_s.empty? ? data.site.title : og.title
-  og_description = og.description.to_s.empty? ? data.site.description : og.description
+
+  # A page can override the title and description in its front matter (the
+  # case studies do). The home page has none, so it falls back to site.yml.
+  page = current_page.data
+  page_title = page.title.to_s.empty? ? data.site.title : "#{page.title} — #{data.about.name}"
+  page_description = page.description.to_s.empty? ? data.site.description : page.description
+
+  og_title = page.title.to_s.empty? ? (og.title.to_s.empty? ? data.site.title : og.title) : page_title
+  og_description = page.description.to_s.empty? ? (og.description.to_s.empty? ? data.site.description : og.description) : page.description
+
+  # Each page's own absolute URL. current_page.url is "/" for the home page and
+  # "/projects/jobeasy/" for a case study (directory_indexes).
+  page_url = current_page.url == "/" ? data.site.url : data.site.url + current_page.url
 -%>
 <html lang="en" data-bs-theme="light">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title><%= data.site.title %></title>
-    <meta name="description" content="<%= data.site.description.strip %>">
+    <title><%= page_title %></title>
+    <meta name="description" content="<%= page_description.strip %>">
     <meta name="author" content="<%= data.about.name %>">
-    <link rel="canonical" href="<%= data.site.url %>">
+    <link rel="canonical" href="<%= page_url %>">
 
     <%# --- Open Graph / social share cards --- %>
-    <meta property="og:type" content="<%= og.type %>">
+    <meta property="og:type" content="<%= page.og_type || og.type %>">
     <meta property="og:title" content="<%= og_title %>">
     <meta property="og:description" content="<%= og_description.strip %>">
     <meta property="og:image" content="<%= og_image_url %>">
-    <meta property="og:url" content="<%= data.site.url %>">
+    <meta property="og:url" content="<%= page_url %>">
     <meta property="og:site_name" content="<%= data.about.name %>">
 
     <%# Twitter/X reads these; summary_large_image gives the full-width card. %>
