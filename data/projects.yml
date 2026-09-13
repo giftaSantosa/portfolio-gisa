@@ -32,6 +32,10 @@
 #                        Use screenshots with the same aspect ratio (16:9
 #                        fits the card best) so slides don't jump around.
 # year        (optional) Shown as a small label on the card.
+# case_study  (optional) Path of a case-study page, e.g.
+#                        "/projects/jobeasy.html" for
+#                        source/projects/jobeasy.html.md. Adds a "Case study"
+#                        link to the card. Leave out if there isn't one.
 
 - title: "JobEasy"
   description: >-
@@ -50,6 +54,7 @@
   featured: true
   repo: "https://github.com/giftaSantosa/job-easy"
   demo: "https://www.jobeasy.space"
+  case_study: "/projects/jobeasy.html"
   images:
     - src: "images/projects/jobeasy-applications.png"
     - src: "images/projects/jobeasy-list.png"
@@ -71,6 +76,7 @@
   featured: false
   repo: "https://github.com/giftaSantosa/dream-app"
   demo: "https://dream-app-lewagon-991343bdff0f.herokuapp.com/user/sign_in"
+  case_study: "/projects/dreamapp.html"
   images:
     - src: "images/projects/dream-app-1.png"
     - src: "images/projects/dream-app-2.png"

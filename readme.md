@@ -67,6 +67,15 @@ Copy an existing block in `data/projects.yml` and edit it:
 
 **Screenshots:** projects currently have `image: ""`, which renders an empty placeholder panel. To add a real one, drop the file into `source/images/projects/` and point at it: `image: "images/projects/my-project.png"`. Use 16:9 (800×450 works well), and fill in `image_alt` so it's described for screen readers.
 
+### Adding a case study
+
+A case study is a Markdown page, still fully static, that gets its own URL.
+
+1. Create `source/projects/my-project.html.md` (copy `jobeasy.html.md`). The front matter sets `layout: case_study`, a `title`, a one-sentence `description`, and `project`, which must match the project's `title:` in `data/projects.yml` so its tags, year, and links are pulled in automatically.
+2. Add `case_study: "/projects/my-project.html"` to that project in `data/projects.yml`. A "Case study" link appears on its card.
+
+The page is built to `/projects/my-project/`. Screenshots go in `source/images/projects/` and are referenced as `![alt text](/images/projects/file.png)`; the build rewrites those paths.
+
 ### Changing the colours
 
 All theming lives in **`source/stylesheets/theme.css`**. The three variables at the top drive everything:

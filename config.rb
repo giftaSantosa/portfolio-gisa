@@ -11,9 +11,21 @@ set :partials_dir, "partials"
 
 # --- Pretty URLs ------------------------------------------------------------
 
-# Turn /about.html into /about/ if you ever add more pages. Harmless for a
-# single-page site, and means links never need a .html suffix.
+# Turn /about.html into /about/, so links never need a .html suffix.
 activate :directory_indexes
+
+# Make url_for/link_to output RELATIVE links between pages (../../#projects
+# rather than /#projects), for the same reason relative_assets exists below:
+# the site is served from a /portfolio/ sub-path, where a root-relative link
+# would point outside it.
+set :relative_links, true
+
+# --- Markdown ---------------------------------------------------------------
+
+# Case studies are written in Markdown (source/projects/*.html.md).
+# auto_ids gives every heading an id, which the table of contents links to.
+set :markdown_engine, :kramdown
+set :markdown, auto_ids: true, smart_quotes: %w[lsquo rsquo ldquo rdquo]
 
 # --- Files to leave out of the build ----------------------------------------
 
