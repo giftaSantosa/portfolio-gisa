@@ -7,7 +7,10 @@
   <div class="container">
     <p class="section-eyebrow reveal" data-reveal><%= ui.skills.eyebrow %></p>
     <h2 class="section-title reveal" data-reveal><%= ui.skills.title %></h2>
-    <p class="section-intro reveal" data-reveal><%= ui.skills.intro.strip %></p>
+    <%# Left out when intro is blank or removed in ui.yml. %>
+    <% unless ui.skills.intro.to_s.strip.empty? %>
+      <p class="section-intro reveal" data-reveal><%= ui.skills.intro.strip %></p>
+    <% end %>
 
     <div class="row g-4">
       <% content(:skills).each do |group| %>

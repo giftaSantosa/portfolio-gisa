@@ -11,7 +11,10 @@
       <div class="col-lg-7">
         <p class="section-eyebrow reveal" data-reveal><%= ui.contact.eyebrow %></p>
         <h2 class="section-title reveal" data-reveal><%= ui.contact.title %></h2>
-        <p class="section-intro reveal" data-reveal><%= ui.contact.intro.strip %></p>
+        <%# Left out when intro is blank or removed in ui.yml. %>
+        <% unless ui.contact.intro.to_s.strip.empty? %>
+          <p class="section-intro reveal" data-reveal><%= ui.contact.intro.strip %></p>
+        <% end %>
 
         <%# Icon buttons. Each carries an aria-label because the icon alone gives a
             screen reader nothing to announce. %>
