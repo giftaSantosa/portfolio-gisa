@@ -32,7 +32,7 @@ nav:
 
 hero:
   # Typed out letter by letter as the main heading.
-  greeting: "Welcome to GISA's Portfolio!"
+  greeting: "ようこそ！"
   view_projects: "View projects"
   portrait_alt: "Memoji of Gifta Santosa"
 
@@ -61,17 +61,16 @@ projects:
 
 skills:
   eyebrow: "03 — Skills"
-  title: "Tools I reach for"
+  title: "使ってる技術"
   intro: >-
-    Highlighted items are the ones I use most days; the rest I'm comfortable
-    picking up when a project calls for them.
+
 
 contact:
   eyebrow: "04 — Contact"
   title: "Let's talk"
   intro: >-
-    I'm here to learn and build more projects! If you have any volunteering,
-    freelance, fulltime, or even just want to chat, contact me on my socials here.
+    これからもたくさん学び、さまざまなプロジェクトを作っていきたいと思っています！
+    下記のSNSからお気軽にご連絡ください。
 
 case_study:
   eyebrow: "Case study"

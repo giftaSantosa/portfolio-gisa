@@ -10,11 +10,11 @@
 name: "Gifta Santosa"
 
 # Your role or job title, shown directly under your name.
-role: "Fullstack Developer"
+role: "ギフタのポートフォリオへ"
 
 # One-sentence hook in the hero. Keep it short; it is set in large type.
 tagline: >-
-  ex recruiter who is currently a fullstack software developer in Tokyo!
+  元IT営業で、現在は東京にいるフルスタックエンジニア、ギフタです！
 
 # Where you are based. Displayed as a small label in the hero.
 location: "Tokyo, Japan"
@@ -28,29 +28,29 @@ availability_label: "Available for new projects"
 # The About section body. Each list item becomes its own paragraph.
 bio:
   - >-
-    Before web development, I spent ~2.5 years recruiting for over 60+
-    developers around the world! Coding actually started as a curiosity while
-    I was recruiting every day. I was curious if I can actually build the things
-    that I was sourcing for 😅
+    ウェブ開発の前は、約2.5年間、世界中の60人以上の開発者の採用に携わっていました。コーディングは、
+    毎日の採用活動の中で生まれた好奇心から始まりました。自分が探している人材が作っているものを、
+    自分でも実際に作れるのだろうか?と気になったのです😅
   - >-
-    This curiosity turns to programming after work every day for 2 years, quit my high-paying job to join IT Bootcamp, and now I'm ready to
-    build more production-level meaningful products!
+    この好奇心がプログラミングへと変わり、2年間毎日仕事のあとに勉強を続け、高収入の仕事を辞めてITブートキャンプ
+    に参加しました。そして今は、本番レベルで意義のあるプロダクトをもっと作っていく準備ができています!
   - >-
-    With ~1.5 years of project & training experience, I specialize in backend development,
-    in particular Ruby on Rails, Java, and Python. For databases, I've used PostgreSQL and MySQL,
-    I've deployed on Heroku Cloud and on target to get AWS Cloud Practicioner Certification.
+    約1.5年のプロジェクト・研修経験があり、バックエンド開発、特にRuby on Rails、Java、Pythonを専門としています。
+    データベースはPostgreSQLとMySQLを使用し、Heroku Cloudへのデプロイ経験があります。
+    AWS認定クラウドプラクティショナーを取得しました。
   - >-
-    Outside of work, I love dancing, snowboarding, and extreme sports like canyoning or white water
-    rafting! I build content from time to time on Linkedin and Instagram so let's connect!
+    仕事以外では、ダンス、スノーボード、そしてキャニオニングやホワイトウォーターラフティングなどの
+    エクストリームスポーツが大好きです！
+
 
 # Short factual rows shown beside the bio. Add or remove freely.
 facts:
   - label: "Experience"
-    value: "1.5+ years of project & training to build web applications"
+    value: "プロジェクト・独学を通じてWebアプリケーションを構築してきた1.5年以上の経験"
   - label: "Focus"
-    value: "Backend architecture, APIs, and data scraping"
+    value: "バックエンド設計、API、データスクレイピング"
   - label: "Currently"
-    value: "Making UmbrellaBot to tell that connects with weather API!"
+    value: "天気APIと連携するUmbrellaBotをAWSLambdaで開発中!"
 
 # The technologies called out as pills in the About section.
 highlights:

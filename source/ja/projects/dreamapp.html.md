@@ -1,130 +1,130 @@
 ---
 # 日本語版 — Japanese version of source/projects/dreamapp.html.md, shown at
-# /ja/projects/dreamapp/. Currently a copy of the English text: translate it in
-# place. `project` must still match a title in data/ja/projects.yml.
+# /ja/projects/dreamapp/. `project` must still match a title in
+# data/ja/projects.yml.
 layout: case_study
 title: "DreamApp"
-description: "A dream journal that helps track and make sense of your dream. User can log a dream, where it gives a fun interpretation and asynchronousely generate an image associated to that dream. Has a chat feature to dig deeper into what that dream means."
+description: "夢を記録し、その意味を読み解くためのドリームジャーナルです。夢を記録すると、ユーモアのある解釈が表示され、その夢に合わせた画像が非同期で生成されます。チャット機能を使えば、夢が何を意味するのかをさらに掘り下げることもできます。"
 project: "DreamApp"
 og_type: "article"
 ---
 
-<nav class="toc" aria-label="On this page" markdown="1">
-<p class="toc-label">On this page</p>
+<nav class="toc" aria-label="このページの内容" markdown="1">
+<p class="toc-label">このページの内容</p>
 
 * TOC
 {:toc}
 </nav>
 
-## Summary
+## 概要 {#summary}
 
-This was a really fun 5-day project with my team! Also marks my first time deploying a real app to cloud (Heroku).
-DreamApp lets you log a dream, then uses an LLM to give it a title, an interpretation, and a set of themes and symbols. A fun image of the dream is generated in the background and pushed to the page over Turbo Streams, and a chat lets you ask follow-up questions about what it means.
+チームで取り組んだ5日間のプロジェクトで、とても楽しかったです！実際のアプリをクラウド（Heroku）にデプロイしたのも、これが初めてでした。
+DreamApp では、夢を記録すると LLM がタイトル、解釈、そしてテーマとシンボルを生成します。夢をイメージした楽しい画像はバックグラウンドで生成され、Turbo Streams 経由でページにプッシュされます。チャットでは、夢の意味について追加で質問することもできます。
 
-Key new concepts I learned building it:
+開発を通じて学んだ主な新しい概念：
 
-- Authentication with Devise, including Google OAuth2 sign-in through OmniAuth
-- Background jobs with Solid Queue, to take slow image generation out of the request cycle
-- Real-time updates with Turbo Streams over Action Cable (Solid Cable), so the image appears the moment it's ready
-- LLM integration with RubyLLM: structured output with a RubyLLM schema, image generation, and a multi-turn chat
+- Devise による認証（OmniAuth 経由の Google OAuth2 サインインを含む）
+- Solid Queue によるバックグラウンドジョブ。時間のかかる画像生成をリクエストサイクルから切り離しました
+- Action Cable（Solid Cable）上の Turbo Streams によるリアルタイム更新。画像が準備できた瞬間に表示されます
+- RubyLLM による LLM 連携：RubyLLM スキーマを使った構造化出力、画像生成、マルチターンのチャット
 
-## Target user
+## 対象ユーザー {#target-user}
 
-Anyone who keeps on forgetting their dreams, and wants to keep a dream journal and get a reflection on what a dream might mean!
+夢をすぐ忘れてしまう人、夢日記をつけて、その夢が何を意味するのか振り返りたい人すべてです！
 
-## The problem
+## 課題 {#the-problem}
 
-**“I forget my dreams”**
-Sometimes we have a dream that we want to remember, but we often forget about them. Now, we can track!
+**「夢を忘れてしまう」**
+覚えておきたい夢を見ても、忘れてしまうことはよくあります。これからは記録できます！
 
-**“I have the same dream 3 times in a row. What does my dream mean?”**
-3 nightmares in a row could mean something is affecting our mental. It's best to have interpretation of those before it's too late!
+**「同じ夢を3回連続で見た。この夢は何を意味するの？」**
+3回連続で悪夢を見るのは、何かが心に影響しているサインかもしれません。手遅れになる前に、その解釈を知っておくのがおすすめです！
 
 
-## Features
+## 機能 {#features}
 
-Easy sign-in
-: Sign in with Google in one click, or use an email and password.
+かんたんサインイン
+: Google でワンクリックでサインインできます。メールアドレスとパスワードでも利用できます。
 
-Dream interpretation
-: Describe your dream and how it felt. The AI gives it a title, a short interpretation, and the main themes and symbols.
+夢の解釈
+: 夢の内容と、そのときの気分を入力します。AI がタイトル、短い解釈、主なテーマとシンボルを生成します。
 
-Dream illustrations
-: Each dream gets its own surreal illustration, generated in the background from its themes, symbols, and mood.
+夢のイラスト
+: それぞれの夢に、テーマ・シンボル・ムードをもとにバックグラウンドで生成されるシュールなイラストが付きます。
 
-Fun loading messages
-: While the image is being painted, the page shows messages like "Consulting a sleep-deprived magician...". The image appears as soon as it's ready, with no refresh.
+楽しいローディングメッセージ
+: 画像を描いている間、「寝不足のマジシャンに相談中…」のようなメッセージが表示されます。画像は準備ができ次第、リフレッシュなしで表示されます。
 
-Dream journal
-: Your dreams are listed by date. Themes and symbols become tags, so you can click one to find every dream that has it.
+夢日記
+: 夢は日付順に一覧表示されます。テーマとシンボルはタグになり、クリックすると、同じタグを持つすべての夢を探せます。
 
-Ask follow-up questions
-: Each dream has its own chat, so you can ask what a specific detail might mean.
+追加の質問
+: 夢ごとに専用のチャットがあり、特定のディテールが何を意味するのか質問できます。
 
-![Landing page: “Understand your dreams.” over a night sky, with a Get Started button](/images/projects/dream-app-1.png)
-![Dream history: a list of dreams, each with its date and AI-generated title](/images/projects/dream-app-4.png)
-![A dream entry: title, date, mood, a generated illustration of monkeys, the interpretation, and theme tags](/images/projects/dream-app-5.png)
+![ランディングページ：夜空の上に「Understand your dreams.」と表示され、Get Started ボタンがある](/images/projects/dream-app-1.png)
+![夢の履歴：日付と AI が生成したタイトルが付いた夢の一覧](/images/projects/dream-app-4.png)
+![夢のエントリー：タイトル、日付、ムード、サルの生成イラスト、解釈、テーマタグ](/images/projects/dream-app-5.png)
 {: .screens}
 
-## Database design
+## データベース設計 {#database-design}
 
-![DreamApp database schema: users has many dreams, and dreams has many messages](/images/projects/dreamapp-schema.png)
+![DreamApp のデータベーススキーマ。users は複数の dreams を持ち、dreams は複数の messages を持つ](/images/projects/dreamapp-schema.png)
 
-Key points:
+ポイント：
 
-- A **user** has many **dreams**, and each dream has many **messages**. Messages hold the follow-up chat, and each one's `role` is `user` or `assistant`.
-- A **dream** stores what the user wrote (`input` and `mood`) and what the AI returned. The `title` has its own column. The summary, themes, and symbols are stored together in an `interpretation` JSONB column and read through `store_accessor`.
-- The generated **image** is attached to the dream with Active Storage and stored on Cloudinary.
-- **Themes and symbols** are also saved as tags with acts-as-taggable-on, in the `tags` and `taggings` tables. This is what makes the filter-by-tag links work.
+- **ユーザー**は複数の**夢**を持ち、各夢は複数の**メッセージ**を持ちます。メッセージは追加質問のチャットを保持し、それぞれの `role` は `user` または `assistant` です。
+- **夢**には、ユーザーが書いた内容（`input` と `mood`）と、AI が返した内容が保存されます。`title` は専用のカラムです。サマリー、テーマ、シンボルは `interpretation` という JSONB カラムにまとめて保存し、`store_accessor` 経由で読み取ります。
+- 生成された**画像**は Active Storage で夢に紐づけられ、Cloudinary に保存されます。
+- **テーマとシンボル**は、acts-as-taggable-on によって `tags` テーブルと `taggings` テーブルにもタグとして保存されます。これがタグによる絞り込みリンクの仕組みです。
 
-## Technical challenges
+## 技術的な課題 {#technical-challenges}
 
-### Google OAuth2 with Devise
+### Devise を使った Google OAuth2 {#google-oauth2-with-devise}
 
-Google sign-in uses `omniauth-google-oauth2` with Devise's `:omniauthable` module, next to the usual email and password login.
+Google サインインには、通常のメール・パスワードログインに加えて、`omniauth-google-oauth2` と Devise の `:omniauthable` モジュールを使っています。
 
-![Sign-in page with email and password fields, a Log in button, and an “Easy Login with Google” button](/images/projects/dream-app-2.png)
+![メール・パスワード欄、Log in ボタン、「Easy Login with Google」ボタンがあるサインインページ](/images/projects/dream-app-2.png)
 {: .screens}
 
-1. **The user clicks “Easy Login with Google.”**
-   The button sends a POST request, protected by `omniauth-rails_csrf_protection`, with Turbo turned off so the browser can follow the redirect. This starts the OAuth2 authorization code flow and sends the user to Google's consent screen.
+1. **ユーザーが「Easy Login with Google」をクリック**
+   このボタンは `omniauth-rails_csrf_protection` で保護された POST リクエストを送信し、ブラウザがリダイレクトを追従できるよう Turbo をオフにしています。これで OAuth2 の認可コードフローが始まり、ユーザーは Google の同意画面に移動します。
 
-2. **Google redirects back with a code.**
-   OmniAuth exchanges the code for an access token and fetches the user's Google profile.
+2. **Google が code を付けてリダイレクトで戻す**
+   OmniAuth がその code をアクセストークンと交換し、ユーザーの Google プロフィールを取得します。
 
-3. **`Users::OmniauthCallbacksController` handles the callback.**
-   `User.from_omniauth` looks up the user by `provider` and `uid`. If there's no match, it builds a new user with the Google email and a random password from `Devise.friendly_token`, and the controller saves it. Devise then signs the user in with its session-based auth and sends them to the page they wanted, or to the home page. They never have to set a password.
+3. **`Users::OmniauthCallbacksController` がコールバックを処理**
+   `User.from_omniauth` が `provider` と `uid` でユーザーを検索します。一致するユーザーがいなければ、Google のメールアドレスと、`Devise.friendly_token` で生成したランダムなパスワードで新しいユーザーを作成し、コントローラーが保存します。その後 Devise がセッションベースの認証でユーザーをサインインさせ、元々アクセスしようとしていたページ、またはホームページに遷移させます。ユーザーがパスワードを設定する必要はありません。
 
 
-### Offloading image generation to Solid Queue
+### 画像生成の Solid Queue へのオフロード {#offloading-image-generation-to-solid-queue}
 
-Generating the image inside the request was slow enough to cause user to exit. The fix was to move image generation into a background job.
+リクエスト内で画像を生成すると、ユーザーが離脱してしまうほど遅くなっていました。解決策は、画像生成をバックグラウンドジョブに移すことでした。
 
-1. **`ImageGenerationJob.perform_later(@dream, result)`** is called at the end of `create`, right after the text interpretation is saved. The user is redirected to the dream page without waiting for the image.
+1. **`ImageGenerationJob.perform_later(@dream, result)`** は、`create` の最後、テキストの解釈を保存した直後に呼び出されます。ユーザーは画像を待たずに夢のページにリダイレクトされます。
 
-2. **The job builds an image prompt** from the interpretation's summary, themes, and symbols, plus the user's mood, and calls `RubyLLM.paint`.
+2. **ジョブが画像プロンプトを作成**します。解釈のサマリー、テーマ、シンボルにユーザーのムードを加えてプロンプトを作り、`RubyLLM.paint` を呼び出します。
 
-3. **The image is attached** to the dream with Active Storage, which uploads it to Cloudinary.
+3. **画像は Active Storage で夢に添付**され、Cloudinary にアップロードされます。
 
-4. **A Turbo Stream broadcast** replaces the loading message on the dream page with the finished image, so no refresh is needed.
+4. **Turbo Stream のブロードキャスト**が、夢のページ上のローディングメッセージを完成した画像に置き換えるので、リフレッシュは不要です。
 
-5. **Solid Queue runs inside Puma** through `plugin :solid_queue`. The web dyno processes jobs too, so no separate worker dyno is needed. Solid Queue, Solid Cache, and Solid Cable all use the app's single Postgres database.
+5. **Solid Queue は Puma 内で動作**します（`plugin :solid_queue`）。web dyno がジョブも処理するため、別の worker dyno は必要ありません。Solid Queue、Solid Cache、Solid Cable はすべて、アプリの単一の Postgres データベースを使っています。
 
-### Real-time updates with Turbo Streams
+### Turbo Streams によるリアルタイム更新 {#real-time-updates-with-turbo-streams}
 
-The dream page shouldn't need a refresh or polling JavaScript to show the image once it's ready.
+画像の準備ができたときに、夢のページでリフレッシュやポーリング用の JavaScript を必要としないようにしたいと考えました。
 
-![A dream entry while the image is generating: a spinner with the message “Consulting a sleep-deprived magician...” above the interpretation](/images/projects/dream-app-3.png)
+![画像生成中の夢のエントリー。解釈の上に、スピナーと「Consulting a sleep-deprived magician...」というメッセージが表示されている](/images/projects/dream-app-3.png)
 {: .screens}
 
-1. **The dream page subscribes** with `turbo_stream_from @dream`, over Action Cable backed by Solid Cable.
+1. **夢のページは購読します**。Solid Cable を裏側に持つ Action Cable 上で、`turbo_stream_from @dream` によって購読します。
 
-2. **While the image doesn't exist yet**, a wrapper `<div>` with `dom_id(@dream)` shows a spinner. Next to it, a Stimulus controller uses Typed.js to type out rotating messages like “Consulting a sleep-deprived magician...”.
+2. **画像がまだ存在しない間は**、`dom_id(@dream)` を持つラッパーの `<div>` にスピナーが表示されます。その隣では、Stimulus コントローラーが Typed.js を使って、「寝不足のマジシャンに相談中…」のようなメッセージを切り替えながらタイピング表示します。
 
-3. **When `ImageGenerationJob` finishes**, it calls `Turbo::StreamsChannel.broadcast_replace_to`, which replaces that wrapper with the rendered image partial. The Stimulus controller's `disconnect()` cleans up the Typed.js instance as the old element is removed.
+3. **`ImageGenerationJob` が完了すると**、`Turbo::StreamsChannel.broadcast_replace_to` を呼び出し、そのラッパーをレンダリング済みの画像パーシャルに置き換えます。古い要素が削除される際に、Stimulus コントローラーの `disconnect()` が Typed.js のインスタンスをクリーンアップします。
 
-4. **The chat uses Turbo Streams too**, but without a broadcast. Sending a message returns `create.turbo_stream.erb`, which adds the user's message and the AI reply to the list and re-renders the chat input to clear it.
+4. **チャットも Turbo Streams を使っています**が、ブロードキャストは行いません。メッセージを送信すると `create.turbo_stream.erb` が返され、ユーザーのメッセージと AI の返信がリストに追加され、チャット入力欄が再レンダリングされてクリアされます。
 
-## Final result
+## 完成形 {#final-result}
 
-You can try the app at [dream-app-lewagon-991343bdff0f.herokuapp.com](https://dream-app-lewagon-991343bdff0f.herokuapp.com/user/sign_in){:target="_blank" rel="noopener noreferrer"}.
+アプリは [dream-app-lewagon-991343bdff0f.herokuapp.com](https://dream-app-lewagon-991343bdff0f.herokuapp.com/user/sign_in){:target="_blank" rel="noopener noreferrer"} で試せます。

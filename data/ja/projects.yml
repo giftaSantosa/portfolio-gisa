@@ -44,11 +44,10 @@
 
 - title: "JobEasy"
   description: >-
-    A job aggregation and tracking app for junior developers job hunting in Japan.
-    It scrapes listings every morning from sites like Wantedly, CareerForum, and japan-dev,
-    gives AI-based feedback on your resume, has a built-in resume editor,
-    an interview coach feature, and even flags whether a job listing is
-    actually worth applying to.
+    日本で就職活動をするジュニアエンジニア向けの、求人集約・応募管理アプリです。
+    Wantedly、CareerForum、japan-dev などのサイトから毎朝求人をスクレイピングします。
+    AIによる履歴書フィードバック、ブラウザ内の履歴書エディタ、面接コーチ機能があり、
+    その求人に本当に応募する価値があるかも判定します。
   tags:
     - "Ruby on Rails"
     - "Javascript (Vanilla JS & Stimulus JS)"
@@ -69,10 +68,10 @@
 
 - title: "DreamApp"
   description: >-
-    A dream journal that helps track and make sense of your dream.
-    User can log a dream, where it gives a fun interpretation and asynchronousely
-    generate an image associated to that dream. Has a chat feature to dig deeper
-    into what that dream means.
+    夢を記録し、その意味を読み解くためのドリームジャーナルです。
+    夢を記録すると、ユーモアのある解釈が表示され、その夢に合わせた画像が
+    非同期で生成されます。チャット機能を使えば、夢が何を意味するのかを
+    さらに掘り下げることもできます。
   tags:
     - "Ruby on Rails"
     - "Javascript (Stimulus JS)"
@@ -92,11 +91,10 @@
 
 - title: "BankingApp (Backend only)"
   description: >-
-    My very first RESTful API! A simple banking system, built with Spring Boot and Java 21.
-    It covers the core account operations: creating, viewing, and deleting accounts,
-    depositing and withdrawing money, and transferring funds between accounts.
-    The app runs in Docker using a multi-stage build, and
-    I tested the API endpoints with pytest and requests, writing up the results in test reports.
+    初めて作ったRESTful APIです!Spring BootとJava 21で構築した、シンプルな銀行システムです。
+    口座の作成・参照・削除、入出金、口座間の送金といった、基本的な口座操作に対応しています。
+    アプリはマルチステージビルドを使ってDocker上で動作し、
+    APIのエンドポイントはpytestとrequestsでテストして、結果をテストレポートにまとめました。
   tags:
     - "Java (Spring Boot)"
     - "Spring Data JPA / Hibernate"

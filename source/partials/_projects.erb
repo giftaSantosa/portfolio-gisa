@@ -14,7 +14,10 @@
   <div class="container">
     <p class="section-eyebrow reveal" data-reveal><%= ui.projects.eyebrow %></p>
     <h2 class="section-title reveal" data-reveal><%= ui.projects.title %></h2>
-    <p class="section-intro reveal" data-reveal><%= ui.projects.intro.strip %></p>
+    <%# Left out when intro is blank or removed in ui.yml. %>
+    <% unless ui.projects.intro.to_s.strip.empty? %>
+      <p class="section-intro reveal" data-reveal><%= ui.projects.intro.strip %></p>
+    <% end %>
 
     <div class="row g-4">
       <% projects.each_with_index do |project, index| %>
