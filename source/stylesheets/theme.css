@@ -39,6 +39,8 @@
   /* --- Typography -------------------------------------------------------- */
   --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, sans-serif;
+  /* Japanese pages (<html lang="ja">) add Japanese system fonts — see the
+     :lang(ja) rule further down. */
   --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
     "Liberation Mono", monospace;
 
@@ -88,4 +90,12 @@
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
   --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.5);
   --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.6);
+}
+
+/* --- Japanese pages ------------------------------------------------------ */
+/* Inter has no Japanese characters, so put Japanese system fonts right after
+   it. Latin text keeps Inter; Japanese text gets a font made for it. */
+:root:lang(ja) {
+  --font-sans: "Inter", "Hiragino Sans", "Hiragino Kaku Gothic ProN",
+    "Noto Sans JP", "Yu Gothic UI", Meiryo, sans-serif;
 }

@@ -1,7 +1,8 @@
 <%#
   Hero section: name, role, tagline, and the primary calls to action.
-  Content comes from data/about.yml and data/social.yml.
+  Content comes from data/about.yml and data/ui.yml (data/ja/ on Japanese pages).
 -%>
+<% about = content(:about) -%>
 <section id="hero" class="section section-hero" data-nav-sentinel>
   <div class="container">
     <div class="row align-items-center g-4 g-lg-5">
@@ -10,19 +11,19 @@
 
         <%# The single <h1> of the page — everything else steps down from here. %>
         <%# Typed.js types into the inner span, so its cursor lands inline inside the h1. %>
-        <h1 class="hero-name reveal" data-reveal><span id="hero-name"></span></h1>
+        <h1 class="hero-name reveal" data-reveal><span id="hero-name" data-typed-text="<%= ui.hero.greeting %>"></span></h1>
 
-        <p class="hero-role reveal" data-reveal><%= data.about.role %></p>
+        <p class="hero-role reveal" data-reveal><%= about.role %></p>
 
-        <p class="hero-tagline reveal" data-reveal><%= data.about.tagline.strip %></p>
+        <p class="hero-tagline reveal" data-reveal><%= about.tagline.strip %></p>
 
         <p class="hero-location reveal" data-reveal>
           <i class="fa-solid fa-location-dot"></i>
-          <%= data.about.location %>
+          <%= about.location %>
         </p>
 
         <div class="hero-actions reveal" data-reveal>
-          <a class="btn btn-primary-solid" href="#projects">View projects</a>
+          <a class="btn btn-primary-solid" href="#projects"><%= ui.hero.view_projects %></a>
         </div>
 
       </div>
@@ -30,7 +31,7 @@
       <%# Portrait — a small avatar above the name on phones, a large circle on the right from lg up. %>
       <div class="col-4 col-sm-3 col-lg-4 offset-lg-1 order-first order-lg-last">
         <div class="ratio ratio-1x1 bg-body-tertiary rounded-circle reveal" data-reveal>
-          <%= image_tag "profile.png", alt: "Memoji of #{data.about.name}", class: "object-fit-contain p-2 p-lg-4" %>
+          <%= image_tag "profile.png", alt: ui.hero.portrait_alt, class: "object-fit-contain p-2 p-lg-4" %>
         </div>
       </div>
 

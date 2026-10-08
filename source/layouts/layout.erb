@@ -6,31 +6,49 @@
 <%
   # Absolute URL for the social share image. Open Graph requires an absolute
   # URL — a relative path will not render a preview card.
-  og = data.site.open_graph
-  og_image_url = "#{data.site.url}/#{og.image}"
+  site = content(:site)
+  about = content(:about)
+  og = site.open_graph
+  og_image_url = "#{site.url}/#{og.image}"
 
   # A page can override the title and description in its front matter (the
   # case studies do). The home page has none, so it falls back to site.yml.
   page = current_page.data
-  page_title = page.title.to_s.empty? ? data.site.title : "#{page.title} — #{data.about.name}"
-  page_description = page.description.to_s.empty? ? data.site.description : page.description
+  page_title = page.title.to_s.empty? ? site.title : "#{page.title} — #{about.name}"
+  page_description = page.description.to_s.empty? ? site.description : page.description
 
-  og_title = page.title.to_s.empty? ? (og.title.to_s.empty? ? data.site.title : og.title) : page_title
-  og_description = page.description.to_s.empty? ? (og.description.to_s.empty? ? data.site.description : og.description) : page.description
+  og_title = page.title.to_s.empty? ? (og.title.to_s.empty? ? site.title : og.title) : page_title
+  og_description = page.description.to_s.empty? ? (og.description.to_s.empty? ? site.description : og.description) : page.description
 
   # Each page's own absolute URL. current_page.url is "/" for the home page and
   # "/projects/jobeasy/" for a case study (directory_indexes).
-  page_url = current_page.url == "/" ? data.site.url : data.site.url + current_page.url
+  page_url = current_page.url == "/" ? site.url : site.url + current_page.url
+
+  # The same page in English and in Japanese, for the hreflang tags below.
+  # Only rendered when the page has a Japanese version.
+  en_page = sitemap.find_resource_by_path(current_page.path.sub(%r{\Aja/}, ""))
+  ja_page = en_page && sitemap.find_resource_by_path("ja/#{en_page.path}")
+  if ja_page
+    en_url = en_page.url == "/" ? site.url : site.url + en_page.url
+    ja_url = site.url + ja_page.url
+  end
 -%>
-<html lang="en" data-bs-theme="light">
+<html lang="<%= lang %>" data-bs-theme="light">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title><%= page_title %></title>
     <meta name="description" content="<%= page_description.strip %>">
-    <meta name="author" content="<%= data.about.name %>">
+    <meta name="author" content="<%= about.name %>">
     <link rel="canonical" href="<%= page_url %>">
+
+    <%# Tells search engines the English and Japanese pages are translations. %>
+    <% if ja_page %>
+      <link rel="alternate" hreflang="en" href="<%= en_url %>">
+      <link rel="alternate" hreflang="ja" href="<%= ja_url %>">
+      <link rel="alternate" hreflang="x-default" href="<%= en_url %>">
+    <% end %>
 
     <%# --- Open Graph / social share cards --- %>
     <meta property="og:type" content="<%= page.og_type || og.type %>">
@@ -38,7 +56,8 @@
     <meta property="og:description" content="<%= og_description.strip %>">
     <meta property="og:image" content="<%= og_image_url %>">
     <meta property="og:url" content="<%= page_url %>">
-    <meta property="og:site_name" content="<%= data.about.name %>">
+    <meta property="og:site_name" content="<%= about.name %>">
+    <meta property="og:locale" content="<%= lang == "ja" ? "ja_JP" : "en_US" %>">
 
     <%# Twitter/X reads these; summary_large_image gives the full-width card. %>
     <meta name="twitter:card" content="summary_large_image">
@@ -98,7 +117,7 @@
   <body>
 
     <%# Lets keyboard users jump straight past the nav to the content. %>
-    <a class="skip-link" href="#main">Skip to main content</a>
+    <a class="skip-link" href="#main"><%= ui.skip_link %></a>
 
     <%= partial "partials/nav" %>
 
@@ -112,6 +131,6 @@
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"></script>
-    <%= javascript_include_tag "theme-toggle", "scroll", "typed" %>
+    <%= javascript_include_tag "theme-toggle", "lang-toggle", "scroll", "typed" %>
   </body>
 </html>

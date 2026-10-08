@@ -1,22 +1,20 @@
 <%#
-  Projects grid. Reads data/projects.yml.
+  Projects grid. Reads data/projects.yml and data/ui.yml (data/ja/ on
+  Japanese pages).
 
   Featured projects are sorted to the front and given an accent border plus a
   badge. `sort_by` with false==0 / true==1 puts featured first; the index keeps
   the sort stable so projects otherwise stay in the order written in the YAML.
 -%>
 <%
-  projects = data.projects.each_with_index.sort_by { |project, i| [project.featured ? 0 : 1, i] }
+  projects = content(:projects).each_with_index.sort_by { |project, i| [project.featured ? 0 : 1, i] }
                                           .map(&:first)
 -%>
 <section id="projects" class="section section-alt">
   <div class="container">
-    <p class="section-eyebrow reveal" data-reveal>02 — Projects</p>
-    <h2 class="section-title reveal" data-reveal>Selected work</h2>
-    <p class="section-intro reveal" data-reveal>
-      A few things I've built recently. Every one of them has its source
-      available!
-    </p>
+    <p class="section-eyebrow reveal" data-reveal><%= ui.projects.eyebrow %></p>
+    <h2 class="section-title reveal" data-reveal><%= ui.projects.title %></h2>
+    <p class="section-intro reveal" data-reveal><%= ui.projects.intro.strip %></p>
 
     <div class="row g-4">
       <% projects.each_with_index do |project, index| %>
@@ -28,7 +26,7 @@
                 <svg class="icon" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" focusable="false">
                   <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256Z"/>
                 </svg>
-                Featured
+                <%= ui.projects.featured %>
               </p>
             <% end %>
 
@@ -57,7 +55,7 @@
                                 data-bs-target="#<%= carousel_id %>"
                                 data-bs-slide-to="<%= i %>"
                                 <%= 'class="active" aria-current="true"' if i.zero? %>
-                                aria-label="<%= project.title %> screenshot <%= i + 1 %>"></button>
+                                aria-label="<%= fill(ui.projects.screenshot_dot, title: project.title, n: i + 1) %>"></button>
                       <% end %>
                     </div>
                   <% end %>
@@ -67,7 +65,7 @@
                       <div class="carousel-item h-100 <%= "active" if i.zero? %>">
                         <img
                           src="<%= image_path(slide.src.sub(%r{\Aimages/}, "")) %>"
-                          alt="<%= slide.alt.to_s.empty? ? "Screenshot #{i + 1} of #{project.title}" : slide.alt %>"
+                          alt="<%= slide.alt.to_s.empty? ? fill(ui.projects.screenshot_alt, title: project.title, n: i + 1) : slide.alt %>"
                           loading="lazy"
                           width="800"
                           height="450">
@@ -78,11 +76,11 @@
                   <% if slides.size > 1 %>
                     <button class="carousel-control-prev" type="button" data-bs-target="#<%= carousel_id %>" data-bs-slide="prev">
                       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                      <span class="visually-hidden">Previous <%= project.title %> screenshot</span>
+                      <span class="visually-hidden"><%= fill(ui.projects.previous_screenshot, title: project.title) %></span>
                     </button>
                     <button class="carousel-control-next" type="button" data-bs-target="#<%= carousel_id %>" data-bs-slide="next">
                       <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                      <span class="visually-hidden">Next <%= project.title %> screenshot</span>
+                      <span class="visually-hidden"><%= fill(ui.projects.next_screenshot, title: project.title) %></span>
                     </button>
                   <% end %>
                 </div>
@@ -102,7 +100,7 @@
                   <% if project.case_study.to_s.empty? %>
                     <%= project.title %>
                   <% else %>
-                    <a class="project-title-link" href="<%= url_for(project.case_study) %>"><%= project.title %></a>
+                    <a class="project-title-link" href="<%= localized_url(project.case_study) %>"><%= project.title %></a>
                   <% end %>
                 </h3>
                 <% unless project.year.to_s.empty? %>
@@ -126,12 +124,12 @@
                 -%>
                 <% unless project.case_study.to_s.empty? %>
                   <a class="project-link"
-                     href="<%= url_for(project.case_study) %>"
-                     aria-label="Read the <%= project.title %> case study">
+                     href="<%= localized_url(project.case_study) %>"
+                     aria-label="<%= fill(ui.projects.case_study_label, title: project.title) %>">
                     <svg class="icon" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" focusable="false">
                       <path d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811V2.828zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492V2.687zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z"/>
                     </svg>
-                    Case study
+                    <%= ui.projects.case_study %>
                   </a>
                 <% end %>
 
@@ -140,9 +138,9 @@
                    href="<%= project.repo %>"
                    target="_blank"
                    rel="noopener noreferrer"
-                   aria-label="<%= project.title %> source code on GitHub (opens in a new tab)">
+                   aria-label="<%= fill(ui.projects.source_label, title: project.title) %>">
                   <%= partial "partials/icon", locals: { name: "github" } %>
-                  Source
+                  <%= ui.projects.source %>
                 </a>
 
                 <%# The demo button only renders when a demo URL is present. %>
@@ -151,12 +149,12 @@
                      href="<%= project.demo %>"
                      target="_blank"
                      rel="noopener noreferrer"
-                     aria-label="<%= project.title %> live demo (opens in a new tab)">
+                     aria-label="<%= fill(ui.projects.demo_label, title: project.title) %>">
                     <svg class="icon" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" focusable="false">
                       <path d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5Z"/>
                       <path d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5Z"/>
                     </svg>
-                    Live demo
+                    <%= ui.projects.live_demo %>
                   </a>
                 <% end %>
               </div>

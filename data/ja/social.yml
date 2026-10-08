@@ -1,0 +1,48 @@
+# 日本語版 — Japanese version of data/social.yml.
+# Currently a copy of the English text: translate the text in place.
+# Keep the same keys and structure as the English file. Links, images,
+# and other non-text fields must be kept in sync with it by hand.
+#
+# Social links and CV download. Accessed in templates as data.social.<key>
+#
+# Every link here opens in a new tab with rel="noopener noreferrer" applied
+# automatically, and gets an aria-label so screen readers announce it properly.
+
+# The icon buttons in the Contact section.
+#
+# FIELD REFERENCE
+# ---------------
+# name  (required) Platform name. Used for the aria-label and tooltip.
+# url   (required) Full URL including https://
+# icon  (required) Which built-in SVG icon to draw. Supported values:
+#                    github, linkedin, email, x, mastodon, dev
+#                  These are defined in source/partials/_icon.erb — add a new
+#                  <when> branch there to support another platform.
+# handle (optional) Your username on that platform, shown in the link list.
+links:
+  - name: "GitHub"
+    url: "https://github.com/giftaSantosa"
+    icon: "github"
+    handle: "@giftaSantosa"
+
+  - name: "LinkedIn"
+    url: "https://linkedin.com/in/gifta-santosa"
+    icon: "linkedin"
+    handle: "gifta-santosa"
+
+  - name: "Instagram"
+    url: "https://www.instagram.com/gipetpet/"
+    icon: "instagram"
+    handle: "gipetpet"
+
+
+# The "Download CV" button.
+cv:
+  # Set to false to hide the CV button everywhere.
+  enabled: false
+  # Button text.
+  label: "Download CV"
+  # Path to the PDF, relative to source/. Replace the placeholder file at
+  # source/cv/gifta-santosa-cv.pdf with your real CV, keeping the same name —
+  # then nothing here needs to change.
+  path: "cv/gifta-santosa-cv.pdf"
