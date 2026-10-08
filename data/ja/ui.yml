@@ -43,10 +43,9 @@ about:
 
 projects:
   eyebrow: "02 — Projects"
-  title: "Selected work"
+  title: "Selected works"
   intro: >-
-    A few things I've built recently. Every one of them has its source
-    available!
+    最近作ったプロジェクトです！
   featured: "Featured"
   case_study: "Case study"
   source: "Source"
