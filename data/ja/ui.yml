@@ -1,0 +1,81 @@
+# 日本語版 — Japanese version of data/ui.yml.
+# Currently a copy of the English text: translate the text in place.
+# Keep the same keys and structure as the English file. Links, images,
+# and other non-text fields must be kept in sync with it by hand.
+#
+# Interface text: section headings, button labels, and screen-reader labels —
+# everything on the page that isn't your own content from the other data files.
+# Accessed in templates as ui.<section>.<key>
+#
+# The Japanese version is data/ja/ui.yml. Keep the same keys in both files.
+#
+# %{title} and %{n} are placeholders, filled in with the project name and the
+# screenshot number. Move them wherever the sentence needs them.
+
+# The EN | JP switch in the nav.
+lang_toggle:
+  label: "Language"
+  en: "EN"
+  ja: "JP"
+
+# Appended to links that open in a new tab, for screen readers.
+opens_new_tab: "(opens in a new tab)"
+
+skip_link: "Skip to main content"
+
+nav:
+  aria_label: "Main navigation"
+  menu_toggle: "Toggle navigation menu"
+  theme_toggle: "Switch between dark and light mode"
+  theme_to_dark: "Switch to dark mode"
+  theme_to_light: "Switch to light mode"
+
+hero:
+  # Typed out letter by letter as the main heading.
+  greeting: "Welcome to GISA's Portfolio!"
+  view_projects: "View projects"
+  portrait_alt: "Memoji of Gifta Santosa"
+
+about:
+  eyebrow: "01 — About"
+  title: "A little background"
+  working_with: "Working with"
+
+projects:
+  eyebrow: "02 — Projects"
+  title: "Selected work"
+  intro: >-
+    A few things I've built recently. Every one of them has its source
+    available!
+  featured: "Featured"
+  case_study: "Case study"
+  source: "Source"
+  live_demo: "Live demo"
+  case_study_label: "Read the %{title} case study"
+  source_label: "%{title} source code on GitHub (opens in a new tab)"
+  demo_label: "%{title} live demo (opens in a new tab)"
+  screenshot_alt: "Screenshot %{n} of %{title}"
+  screenshot_dot: "%{title} screenshot %{n}"
+  previous_screenshot: "Previous %{title} screenshot"
+  next_screenshot: "Next %{title} screenshot"
+
+skills:
+  eyebrow: "03 — Skills"
+  title: "Tools I reach for"
+  intro: >-
+    Highlighted items are the ones I use most days; the rest I'm comfortable
+    picking up when a project calls for them.
+
+contact:
+  eyebrow: "04 — Contact"
+  title: "Let's talk"
+  intro: >-
+    I'm here to learn and build more projects! If you have any volunteering,
+    freelance, fulltime, or even just want to chat, contact me on my socials here.
+
+case_study:
+  eyebrow: "Case study"
+  all_projects: "All projects"
+  back: "Back to all projects"
+  live_demo: "Live demo"
+  source_code: "Source code"

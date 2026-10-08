@@ -19,9 +19,10 @@
   function syncButton() {
     var isDark = root.getAttribute("data-bs-theme") === "dark";
     toggle.setAttribute("aria-pressed", String(isDark));
+    // The tooltip text comes from data/ui.yml, so it follows the page language.
     toggle.setAttribute(
       "title",
-      isDark ? "Switch to light mode" : "Switch to dark mode"
+      toggle.getAttribute(isDark ? "data-title-to-light" : "data-title-to-dark")
     );
   }
 

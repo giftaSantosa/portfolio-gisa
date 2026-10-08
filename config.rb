@@ -27,6 +27,60 @@ set :relative_links, true
 set :markdown_engine, :kramdown
 set :markdown, auto_ids: true, smart_quotes: %w[lsquo rsquo ldquo rdquo]
 
+# --- Languages (EN / JP) ----------------------------------------------------
+
+# English pages live at the root (/, /projects/jobeasy/). Japanese pages live
+# under /ja/ (/ja/, /ja/projects/jobeasy/). The EN | JP switch in the nav links
+# between the two versions of the same page.
+#
+# Where the Japanese text lives:
+#   data/ja/*.yml           Japanese version of each data/*.yml file
+#   source/ja/projects/*.md Japanese version of each case study
+#
+# The home page has no separate Japanese template — this renders the same
+# index.html.erb again at /ja/, and the helpers below make it read data/ja/.
+proxy "/ja/index.html", "/index.html"
+
+helpers do
+  # "ja" on any page under /ja/, otherwise "en".
+  def lang
+    current_page.url.start_with?("/ja/") ? "ja" : "en"
+  end
+
+  # The data file for the current language, e.g. content(:about) is
+  # data/ja/about.yml on Japanese pages and data/about.yml on English ones.
+  # Falls back to the English file when there is no Japanese one.
+  def content(name)
+    (lang == "ja" && data.ja && data.ja[name]) || data[name]
+  end
+
+  # Interface text: section headings, button labels, screen-reader labels.
+  # Lives in data/ui.yml (English) and data/ja/ui.yml (Japanese).
+  def ui
+    content(:ui)
+  end
+
+  # Fills %{placeholders} in a ui.yml string, e.g.
+  #   fill(ui.projects.source_label, title: "JobEasy")
+  def fill(text, values)
+    values.reduce(text.to_s) { |out, (key, value)| out.gsub("%{#{key}}", value.to_s) }
+  end
+
+  # A link to a site page in the given language (the current one by default).
+  # Pass the English path, e.g. localized_url("/projects/jobeasy.html").
+  # When a page has no Japanese version yet, it links to the English one.
+  def localized_url(path, to = lang)
+    path = "/" + path.sub(%r{\A/}, "").sub(%r{\Aja/}, "")
+    path = "/ja#{path}" if to == "ja" && sitemap.find_resource_by_path("/ja#{path}")
+    url_for(path)
+  end
+
+  # True on the home page in either language.
+  def home_page?
+    current_page.path.sub(%r{\Aja/}, "") == "index.html"
+  end
+end
+
 # --- Files to leave out of the build ----------------------------------------
 
 # Keeps the empty screenshot folder in git without shipping the note file.

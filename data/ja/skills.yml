@@ -1,0 +1,68 @@
+# 日本語版 — Japanese version of data/skills.yml.
+# Currently a copy of the English text: translate the text in place.
+# Keep the same keys and structure as the English file. Links, images,
+# and other non-text fields must be kept in sync with it by hand.
+#
+# Skills, grouped by category. Accessed in templates as data.skills.
+#
+# FIELD REFERENCE
+# ---------------
+# category (required) The group heading, e.g. "Languages".
+# items    (required) List of skills in that group. Each has:
+#            name  (required) The skill label shown on the pill.
+#            level (optional) "core" or "working". Skills marked "core" are
+#                             visually emphasised with the accent colour.
+#                             Anything else renders as a plain pill.
+#
+# Add a whole new category by copying one of the blocks below.
+
+- category: "Languages"
+  items:
+    - name: "Ruby"
+      level: "core"
+    - name: "Java"
+      level: "core"
+    - name: "Python"
+      level: "core"
+    - name: "JavaScript"
+      level: "core"
+    - name: "SQL"
+      level: "core"
+    # - name: "TypeScript"
+    #   level: "working"
+    # - name: "Bash"
+    #   level: "working"
+
+- category: "Frameworks & Libraries"
+  items:
+    - name: "Ruby on Rails"
+      level: "core"
+    - name: "Spring Boot"
+      level: "core"
+    - name: "Action Cable"
+      level: "working"
+    - name: "Solid Queue"
+      level: "working"
+    - name: "Turbo Streams"
+      level: "working"
+
+
+- category: "Databases"
+  items:
+    - name: "PostgreSQL"
+      level: "core"
+    - name: "MySQL"
+      level: "core"
+
+- category: "Cloud & Tools"
+  items:
+    - name: "AWS"
+      level: "working"
+    - name: "Heroku"
+      level: "core"
+    - name: "Docker"
+      level: "working"
+    - name: "Git"
+      level: "core"
+    - name: "GitHub Actions"
+      level: "working"

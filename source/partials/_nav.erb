@@ -1,30 +1,49 @@
 <%#
-  Sticky top navigation: brand, smooth-scroll section links, and the
-  dark/light theme toggle. Link labels come from the `nav:` list in
-  data/site.yml — each entry's `id` must match a <section id="..."> on the page.
+  Sticky top navigation: brand, smooth-scroll section links, the EN | JP
+  language switch, and the dark/light theme toggle. Link labels come from the
+  `nav:` list in data/site.yml (data/ja/site.yml on Japanese pages) — each
+  entry's `id` must match a <section id="..."> on the page.
 
   On the home page the links are plain anchors (#about). On any other page
   (a case study) they point back at the home page's sections instead, via
   url_for so the path stays relative under /portfolio/.
 -%>
-<% home = current_page.url == "/" ? "" : url_for("/index.html") -%>
+<% home = home_page? ? "" : localized_url("/index.html") -%>
 <header>
-  <nav class="navbar navbar-expand-md site-nav fixed-top" aria-label="Main navigation">
+  <nav class="navbar navbar-expand-md site-nav fixed-top" aria-label="<%= ui.nav.aria_label %>">
     <div class="container">
       <a class="navbar-brand fw-semibold" href="<%= home %>#hero">
         <%# <%= image_tag "images/home.png", style: "width: 50px; height: auto;" %>
-        <p>Gifta Santosa</p>
+        <p><%= content(:about).name %></p>
       </a>
 
       <div class="d-flex align-items-center order-md-last">
+        <%#
+          --- Language switch. Two links to this same page in English and
+          Japanese; the current one is highlighted. lang-toggle.js carries the
+          #section over, so switching keeps your place on the page.
+        -%>
+        <div class="lang-toggle" role="group" aria-label="<%= ui.lang_toggle.label %>">
+          <% %w[en ja].each do |code| %>
+            <a class="lang-toggle-link"
+               href="<%= localized_url(current_page.path, code) %>"
+               hreflang="<%= code %>"
+               lang="<%= code %>"
+               data-lang-link
+               <%= 'aria-current="true"' if code == lang %>><%= ui.lang_toggle[code] %></a>
+          <% end %>
+        </div>
+
         <%# --- Theme toggle. Both icons are rendered; CSS shows the relevant one. --- %>
         <button
           type="button"
           id="theme-toggle"
           class="btn btn-theme-toggle"
-          aria-label="Switch between dark and light mode"
+          aria-label="<%= ui.nav.theme_toggle %>"
           aria-pressed="false"
-          title="Toggle dark mode">
+          title="<%= ui.nav.theme_to_dark %>"
+          data-title-to-dark="<%= ui.nav.theme_to_dark %>"
+          data-title-to-light="<%= ui.nav.theme_to_light %>">
           <i class="fa-regular fa-sun icon icon-sun"></i>
           <i class="fa-solid fa-moon icon-moon icon"></i>
         </button>
@@ -36,14 +55,14 @@
           data-bs-target="#nav-links"
           aria-controls="nav-links"
           aria-expanded="false"
-          aria-label="Toggle navigation menu">
+          aria-label="<%= ui.nav.menu_toggle %>">
           <span class="navbar-toggler-icon"></span>
         </button>
       </div>
 
       <div class="collapse navbar-collapse" id="nav-links">
         <ul class="navbar-nav ms-auto me-md-3">
-          <% data.site.nav.each do |item| %>
+          <% content(:site).nav.each do |item| %>
             <li class="nav-item">
               <%# data-nav-link is what scroll.js watches to set the active state. %>
               <a class="nav-link" data-nav-link href="<%= home %>#<%= item.id %>"><%= item.label %></a>

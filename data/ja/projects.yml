@@ -1,0 +1,111 @@
+# 日本語版 — Japanese version of data/projects.yml.
+# Currently a copy of the English text: translate the text in place.
+# Keep the same keys and structure as the English file. Links, images,
+# and other non-text fields must be kept in sync with it by hand.
+#
+# Portfolio projects. Each "- title:" block below is one project card.
+# Accessed in templates as data.projects (a list you can loop over).
+#
+# FIELD REFERENCE
+# ---------------
+# title       (required) Project name, shown as the card heading.
+# description (required) 2–3 sentences. What it does and what is interesting
+#                        about how it was built.
+# tags        (required) List of technologies. Rendered as small tag pills.
+# featured    (required) true or false. Featured projects are sorted to the
+#                        front of the grid and get an accent border plus a
+#                        "Featured" badge. Aim for 1–2 featured projects.
+# repo        (required) URL of the public source code. Opens in a new tab.
+# demo        (optional) URL of a live deployment. The "Live demo" button is
+#                        hidden entirely when this is blank or removed.
+# images      (optional) List of screenshots. Each entry has:
+#                          src  Path relative to source/, e.g.
+#                               "images/projects/jobeasy-1.png"
+#                          alt  Describes the screenshot for screen readers
+#                               and for when the image fails to load.
+#                        An empty list ([]) renders a blank placeholder block,
+#                        so the cards keep their shape until you have real
+#                        screenshots. One entry shows a single image; two or
+#                        more turn into a carousel automatically. To add one:
+#                        drop the file into source/images/projects/ and add an
+#                        entry, e.g.
+#                          images:
+#                            - src: "images/projects/jobeasy-1.png"
+#                              alt: "Job listings dashboard"
+#                            - src: "images/projects/jobeasy-2.png"
+#                              alt: "AI resume feedback panel"
+#                        Use screenshots with the same aspect ratio (16:9
+#                        fits the card best) so slides don't jump around.
+# year        (optional) Shown as a small label on the card.
+# case_study  (optional) Path of a case-study page, e.g.
+#                        "/projects/jobeasy.html" for
+#                        source/projects/jobeasy.html.md. Adds a "Case study"
+#                        link to the card. Leave out if there isn't one.
+
+- title: "JobEasy"
+  description: >-
+    A job aggregation and tracking app for junior developers job hunting in Japan.
+    It scrapes listings every morning from sites like Wantedly, CareerForum, and japan-dev,
+    gives AI-based feedback on your resume, has a built-in resume editor,
+    an interview coach feature, and even flags whether a job listing is
+    actually worth applying to.
+  tags:
+    - "Ruby on Rails"
+    - "Javascript (Vanilla JS & Stimulus JS)"
+    - "PostgreSQL"
+    - "RubyLLM (OpenAI model)"
+    - "Solid Queue, Action Cable"
+    - "Heroku"
+  featured: true
+  repo: "https://github.com/giftaSantosa/job-easy"
+  demo: "https://www.jobeasy.space"
+  case_study: "/projects/jobeasy.html"
+  images:
+    - src: "images/projects/jobeasy-applications.png"
+    - src: "images/projects/jobeasy-list.png"
+    - src: "images/projects/jobeasy-main.png"
+    - src: "images/projects/jobeasy-resume.png"
+  year: "2026"
+
+- title: "DreamApp"
+  description: >-
+    A dream journal that helps track and make sense of your dream.
+    User can log a dream, where it gives a fun interpretation and asynchronousely
+    generate an image associated to that dream. Has a chat feature to dig deeper
+    into what that dream means.
+  tags:
+    - "Ruby on Rails"
+    - "Javascript (Stimulus JS)"
+    - "Turbosteam (Websocket)"
+    - "Heroku"
+  featured: false
+  repo: "https://github.com/giftaSantosa/dream-app"
+  demo: "https://dream-app-lewagon-991343bdff0f.herokuapp.com/user/sign_in"
+  case_study: "/projects/dreamapp.html"
+  images:
+    - src: "images/projects/dream-app-1.png"
+    - src: "images/projects/dream-app-2.png"
+    - src: "images/projects/dream-app-3.png"
+    - src: "images/projects/dream-app-4.png"
+    - src: "images/projects/dream-app-5.png"
+  year: "2026"
+
+- title: "BankingApp (Backend only)"
+  description: >-
+    My very first RESTful API! A simple banking system, built with Spring Boot and Java 21.
+    It covers the core account operations: creating, viewing, and deleting accounts,
+    depositing and withdrawing money, and transferring funds between accounts.
+    The app runs in Docker using a multi-stage build, and
+    I tested the API endpoints with pytest and requests, writing up the results in test reports.
+  tags:
+    - "Java (Spring Boot)"
+    - "Spring Data JPA / Hibernate"
+    - "MySQL"
+    - "Maven"
+    - "Python (pytest, requests)"
+  featured: false
+  repo: "https://github.com/giftaSantosa/bankingApp"
+  # No live demo for this one — the button is hidden automatically.
+  demo: ""
+  images: []
+  year: "2025"

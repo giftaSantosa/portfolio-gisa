@@ -46,6 +46,18 @@ Everything you'd normally want to change is in `data/`. No ERB, CSS, or JavaScri
 
 Every field is documented with a comment right above it in the file.
 
+### English / Japanese
+
+The site has two versions: English at `/` and Japanese at `/ja/`. The **EN | JP** switch in the nav links between the same page in each language.
+
+| English | Japanese |
+|---|---|
+| `data/about.yml`, `projects.yml`, `site.yml`, `skills.yml`, `social.yml` | Same file names in `data/ja/` |
+| `data/ui.yml` — section headings, button labels, screen-reader text | `data/ja/ui.yml` |
+| `source/projects/<name>.html.md` — case studies | `source/ja/projects/<name>.html.md` |
+
+The Japanese files currently hold a copy of the English text. To translate, edit them in place and keep the keys and structure the same as the English file. Links, images, and other non-text fields are not shared between the two, so when you add a project or change a URL, change it in both. If a `data/ja/` file is deleted, the Japanese pages fall back to the English one. A case study with no Japanese file links to the English page.
+
 ### Adding a project
 
 Copy an existing block in `data/projects.yml` and edit it:
